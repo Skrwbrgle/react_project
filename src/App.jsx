@@ -1,33 +1,36 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { IconBrandFacebook, IconBrandGithub, IconBrandTwitter } from "@tabler/icons-react";
+import clsx from "clsx";
 
-function App() {
-  const [count, setCount] = useState(0)
-
+/* eslint-disable react/prop-types */
+export default function App() {
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank" rel="noreferrer">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className={"bg-slate-900 grid place-content-center min-h-screen"}>
+      <div className={'flex gap-x-2'}>
+        <Button onClick={() => console.log('Login')} type='submit'>
+          <IconBrandFacebook/>
+          Login
+        </Button>
+        <Button className='bg-sky-600' onClick={() => console.log('Login')} type='button'>
+          <IconBrandTwitter className="w-5 h-5"/>
+          Login
+        </Button>
+        <Button className='bg-gray-600' onClick={() => console.log('Login')} type='button'>
+          <IconBrandGithub className="w-5 h-5"/>
+          Login
+        </Button>
       </div>
-      <h1>Belajar React By Yoga Pratama</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </div>
+  );
+
+  function Button (props) {
+    const {className = 'bg-blue-600', children, text, type='submit'} = props;
+    return (
+      <button {...props} type={type} className={clsx(
+        className,
+        '[&>svg]:w-5 [&>svg]:h-5 [&>svg]:stroke-1 flex items-center gap-x-2 text-white px-4 py-2 rounded'
+      )}>
+          {text || children}
+      </button>
+    );
+  }
 }
